@@ -7,8 +7,7 @@ Change the theme, language or text size in one tab and every other tab follows w
 milliseconds. Preferences survive closing all tabs, a new tab never flashes the wrong theme, and
 simultaneous edits from different tabs always settle on the same value everywhere.
 
-**Live demo:** https://yashrajkanawade357.github.io/GDG-Project-Submission/ (open it in two or
-more tabs)
+**Live demo:** https://gdg-project-submission.vercel.app (open it in two or more tabs)
 
 ## Features
 
@@ -47,9 +46,9 @@ Then open the printed URL (http://localhost:5173 by default) in **two or more ta
 | `npm run build`   | Type-checks, then builds a static site into `dist/` |
 | `npm run preview` | Serves the production build locally                |
 
-The build is a plain static site with relative asset paths, so it can be hosted anywhere. Every
-push to `main` runs the tests, builds, and deploys to GitHub Pages
-(`.github/workflows/deploy.yml`).
+The build is a plain static site with relative asset paths, so it can be hosted anywhere. The
+live demo is on Vercel, which redeploys on every push to `main`. GitHub Actions runs the tests and
+the build on every push (`.github/workflows/ci.yml`).
 
 ### Things to try
 
