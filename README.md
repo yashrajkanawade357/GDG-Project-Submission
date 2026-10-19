@@ -1,4 +1,4 @@
-# Multi-Tab Settings Synchronization
+# Tandem: multi-tab settings synchronization
 
 GDG Tech Wildcard Entry: Frontend Development, Task 1.
 
@@ -7,7 +7,8 @@ Change the theme, language or text size in one tab and every other tab follows w
 milliseconds. Preferences survive closing all tabs, a new tab never flashes the wrong theme, and
 simultaneous edits from different tabs always settle on the same value everywhere.
 
-**Live demo:** https://gdg-project-submission.vercel.app (open it in two or more tabs)
+**Live demo:** https://gdg-project-submission.vercel.app (landing page) and
+https://gdg-project-submission.vercel.app/app/ (the app itself; open it in two or more tabs)
 
 ## Features
 
@@ -25,7 +26,11 @@ simultaneous edits from different tabs always settle on the same value everywher
   - a list of open tabs, each with a fingerprint of its settings, showing whether they agree
   - a conflict drill that makes every tab write at the same instant
   - an activity log showing where each change came from
-- No UI framework and no runtime dependencies: about 12 kB of gzipped JavaScript.
+- The app has no UI framework and no runtime dependencies: about 12 kB of gzipped JavaScript.
+- A landing page with a three.js scene that acts out the sync model: five tab panels on one
+  broadcast bus, changes travelling between them, and simultaneous writes resolving to the same
+  winner. three.js is loaded only on that page, after its text has rendered, and the page follows
+  the app's theme live.
 
 ## Running it
 
@@ -36,13 +41,13 @@ npm install
 npm run dev
 ```
 
-Then open the printed URL (http://localhost:5173 by default) in **two or more tabs**, or press
-**Open another tab** in the app.
+The landing page is at http://localhost:5173/ and the app at http://localhost:5173/app/. Open the
+app in **two or more tabs**, or press **Open another tab** in the app.
 
 | Command           | What it does                                       |
 | ----------------- | -------------------------------------------------- |
 | `npm run dev`     | Development server with hot reload                 |
-| `npm test`        | Runs the 66 unit and multi-tab simulation tests    |
+| `npm test`        | Runs the 67 unit and multi-tab simulation tests    |
 | `npm run build`   | Type-checks, then builds a static site into `dist/` |
 | `npm run preview` | Serves the production build locally                |
 
@@ -140,7 +145,7 @@ The stored copy always ends up with the latest value without needing locks.
 
 ## No flash of the wrong theme
 
-`index.html` contains a small inline script in `<head>`. It runs synchronously, before the
+`app/index.html` contains a small inline script in `<head>`. It runs synchronously, before the
 stylesheet and the body. It reads the saved state, validates each value, and sets `data-theme`,
 the root font size and `lang` on `<html>`. The first frame the browser paints is therefore
 already correct. With nothing saved, the theme follows the operating system's
@@ -162,7 +167,7 @@ Measured in a Chromium-based browser, with three tabs open and 64 edits made by 
 
 ## Tests
 
-66 tests run with Vitest and jsdom (`npm test`):
+67 tests run with Vitest and jsdom (`npm test`):
 
 - **Clock:** monotonic under clock jumps, causality, ties.
 - **Merge:** property checks over 300 random document triples confirming commutativity,
@@ -181,10 +186,16 @@ Measured in a Chromium-based browser, with three tabs open and 64 edits made by 
 ## Project structure
 
 ```
-index.html                Page shell and the inline boot script
+index.html                Landing page
+app/index.html            App page shell and the inline boot script
 src/
-  main.ts                 Entry point
-  styles.css              Theme tokens (light and dark), layout
+  main.ts                 App entry point
+  theme.css               Shared colour tokens (light and dark), type, buttons
+  styles.css              App layout
+  landing/
+    main.ts               Landing entry; follows the app's theme through storage events
+    scene.ts              three.js scene: tab panels, broadcast bus, last-writer-wins pulses
+    landing.css           Landing layout
   sync/
     types.ts              Settings, Stamp and document types
     schema.ts             Defaults, validation, (de)serialization, fingerprints

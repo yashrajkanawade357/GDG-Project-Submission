@@ -1,15 +1,18 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import indexHtml from '../index.html?raw';
+import indexHtml from '../app/index.html?raw';
+import landingHtml from '../index.html?raw';
 import { withField } from '../src/sync/merge';
 import { FONT_SIZE, STORAGE_KEY, defaultDoc, serializeDoc } from '../src/sync/schema';
 import { LANGUAGES, type Language } from '../src/sync/types';
 
 /** The inline script in <head> that runs before first paint. */
-const bootScript = (() => {
-  const match = /<script>([\s\S]*?)<\/script>/.exec(indexHtml);
-  if (!match?.[1]) throw new Error('index.html has no inline boot script');
+function inlineScript(html: string): string {
+  const match = /<script>([\s\S]*?)<\/script>/.exec(html);
+  if (!match?.[1]) throw new Error('page has no inline boot script');
   return match[1];
-})();
+}
+
+const bootScript = inlineScript(indexHtml);
 
 function boot(stored: string | null): { theme: string | null; fontSize: string; lang: string } {
   const root = document.documentElement;
@@ -74,5 +77,15 @@ describe('boot script (no flash of the wrong theme)', () => {
     const tooBig = JSON.stringify({ v: 1, fields: { fontSize: { value: FONT_SIZE.max + 1, stamp } } });
     expect(boot(tooBig).fontSize).toBe(`${FONT_SIZE.default}px`);
     expect(indexHtml).toContain(`'${STORAGE_KEY}'`);
+  });
+});
+
+describe('landing page boot script', () => {
+  it('uses the theme saved by the app', () => {
+    const dark = withField(defaultDoc(false), 'darkMode', { value: true, stamp });
+    localStorage.setItem(STORAGE_KEY, serializeDoc(dark));
+    document.documentElement.removeAttribute('data-theme');
+    new Function(inlineScript(landingHtml))();
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
   });
 });

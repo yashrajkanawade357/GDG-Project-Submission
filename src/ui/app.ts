@@ -4,88 +4,80 @@ import { LANGUAGES, type Language, type SettingKey, type Settings } from '../syn
 import { LANGUAGE_NAMES, MESSAGES, type Messages, type StaticKey } from './i18n';
 
 const TEMPLATE = /* html */ `
-<div class="shell">
-  <header class="topbar">
-    <div class="brand">
-      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
-        <rect x="3" y="9" width="18" height="18" rx="4" fill="currentColor" />
-        <rect x="11" y="4" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="2.5" />
-      </svg>
-      <div>
-        <h1 data-i18n="title"></h1>
-        <p class="lede" data-i18n="subtitle"></p>
-      </div>
-    </div>
-    <div class="topbar-actions">
-      <span class="tab-chip"><span class="tab-dot" id="self-dot"></span><span id="self-label"></span></span>
-      <button type="button" class="btn btn-ghost" id="open-tab" data-i18n="openTab"></button>
+<div class="frame">
+  <header class="bar">
+    <h1 class="wordmark"><a href="../" title="Tandem">Tandem</a></h1>
+    <p class="bar-note" data-i18n="subtitle"></p>
+    <div class="bar-right">
+      <span class="this-tab"><span class="swatch" id="self-dot"></span><span id="self-label"></span></span>
+      <button type="button" class="btn" id="open-tab"><span data-i18n="openTab"></span><span aria-hidden="true">↗</span></button>
     </div>
   </header>
 
-  <main class="grid">
-    <section class="card" aria-labelledby="prefs-title">
+  <main class="columns">
+    <section class="col prefs" aria-labelledby="prefs-title">
       <h2 id="prefs-title" data-i18n="preferences"></h2>
 
-      <div class="field">
-        <div class="field-text">
-          <label class="field-title" for="dark-mode" data-i18n="darkMode"></label>
+      <div class="row">
+        <div class="row-text">
+          <label class="row-title" for="dark-mode" data-i18n="darkMode"></label>
           <p class="hint" data-i18n="darkModeHint"></p>
         </div>
-        <span class="switch">
-          <span class="switch-state" id="dark-mode-state" aria-hidden="true"></span>
+        <span class="seg">
           <input type="checkbox" role="switch" id="dark-mode" />
-          <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          <span class="seg-opt seg-light" aria-hidden="true" data-i18n="light"></span>
+          <span class="seg-opt seg-dark" aria-hidden="true" data-i18n="dark"></span>
         </span>
       </div>
 
-      <div class="field">
-        <div class="field-text">
-          <label class="field-title" for="language" data-i18n="language"></label>
+      <div class="row">
+        <div class="row-text">
+          <label class="row-title" for="language" data-i18n="language"></label>
           <p class="hint" data-i18n="languageHint"></p>
         </div>
         <span class="select"><select id="language"></select></span>
       </div>
 
-      <div class="field field-stack">
-        <div class="field-row">
-          <div class="field-text">
-            <label class="field-title" for="font-size" data-i18n="textSize"></label>
-            <p class="hint" data-i18n="textSizeHint"></p>
-          </div>
-          <output class="size-value" id="font-size-value" for="font-size"></output>
+      <div class="row row-size">
+        <div class="row-text">
+          <label class="row-title" for="font-size" data-i18n="textSize"></label>
+          <p class="hint" data-i18n="textSizeHint"></p>
         </div>
-        <input type="range" id="font-size" step="1" />
-        <div class="range-scale" aria-hidden="true"><span id="size-min"></span><span id="size-max"></span></div>
+        <output class="size-figure" id="font-size-value" for="font-size"></output>
+        <div class="slider">
+          <input type="range" id="font-size" step="1" />
+          <div class="ticks" aria-hidden="true"></div>
+          <div class="range-scale" aria-hidden="true"><span id="size-min"></span><span id="size-max"></span></div>
+        </div>
         <p class="preview" data-i18n="preview"></p>
       </div>
 
-      <p class="saved-note">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        <span data-i18n="savedNote"></span>
-      </p>
+      <p class="saved-note" data-i18n="savedNote"></p>
     </section>
 
-    <section class="card" aria-labelledby="monitor-title">
+    <section class="col monitor" aria-labelledby="monitor-title">
       <h2 id="monitor-title" data-i18n="monitor"></h2>
 
       <div class="block">
         <h3 data-i18n="latency"></h3>
-        <dl class="stats">
+        <dl class="readouts">
           <div><dt data-i18n="last"></dt><dd id="lat-last">–</dd></div>
           <div><dt data-i18n="average"></dt><dd id="lat-mean">–</dd></div>
           <div><dt data-i18n="p95"></dt><dd id="lat-p95">–</dd></div>
           <div><dt data-i18n="max"></dt><dd id="lat-max">–</dd></div>
         </dl>
-        <svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true">
-          <polyline id="spark-line" points="" />
-        </svg>
+        <div class="trace">
+          <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true">
+            <polyline id="spark-line" points="" />
+          </svg>
+        </div>
         <p class="note" id="lat-note"></p>
       </div>
 
       <div class="block">
         <div class="block-head">
           <h3 data-i18n="tabs"></h3>
-          <span class="pill" id="tab-count"></span>
+          <span class="count" id="tab-count"></span>
         </div>
         <ul class="tab-list" id="tab-list"></ul>
         <p class="status" id="sync-status" role="status"></p>
@@ -95,7 +87,7 @@ const TEMPLATE = /* html */ `
         <h3 data-i18n="drill"></h3>
         <p class="hint" data-i18n="drillHint"></p>
         <div class="drill-actions">
-          <button type="button" class="btn" id="run-drill" data-i18n="runDrill"></button>
+          <button type="button" class="btn btn-solid" id="run-drill" data-i18n="runDrill"></button>
           <span class="note" id="drill-need"></span>
         </div>
         <div class="drill-result" id="drill-result" aria-live="polite"></div>
@@ -150,7 +142,6 @@ export function mountApp(root: HTMLElement, sync: TabSync): void {
     selfLabel: find('#self-label'),
     openTab: find<HTMLButtonElement>('#open-tab'),
     darkMode: find<HTMLInputElement>('#dark-mode'),
-    darkModeState: find('#dark-mode-state'),
     language: find<HTMLSelectElement>('#language'),
     fontSize: find<HTMLInputElement>('#font-size'),
     fontSizeValue: find<HTMLOutputElement>('#font-size-value'),
@@ -234,13 +225,12 @@ export function mountApp(root: HTMLElement, sync: TabSync): void {
     ui.darkMode.checked = settings.darkMode;
     ui.language.value = settings.language;
     ui.fontSize.value = String(settings.fontSize);
-    ui.fontSizeValue.textContent = `${settings.fontSize}px`;
+    ui.fontSizeValue.textContent = String(settings.fontSize);
 
     if (settings.language !== lang) {
       lang = settings.language;
       t = MESSAGES[lang];
     }
-    ui.darkModeState.textContent = settings.darkMode ? t.on : t.off;
   }
 
   function renderAll(): void {
@@ -249,7 +239,6 @@ export function mountApp(root: HTMLElement, sync: TabSync): void {
       element.textContent = t[element.dataset.i18n as StaticKey];
     }
     ui.selfLabel.textContent = t.tabLabel(shortCode(sync.tabId));
-    ui.darkModeState.textContent = sync.settings.darkMode ? t.on : t.off;
     renderLatency();
     renderPeers();
     renderDrill();
@@ -309,7 +298,7 @@ export function mountApp(root: HTMLElement, sync: TabSync): void {
 
   function tabRow(id: string, digest: string | null, state: 'self' | 'ok' | 'wait'): HTMLLIElement {
     const row = el('li', `tab-row${state === 'self' ? ' is-self' : ''}`);
-    const dot = el('span', 'tab-dot');
+    const dot = el('span', 'swatch');
     dot.style.setProperty('--tab-hue', String(tabHue(id)));
     const badgeText = state === 'self' ? t.you : state === 'ok' ? t.inSync : t.catchingUp;
     row.append(
@@ -334,7 +323,7 @@ export function mountApp(root: HTMLElement, sync: TabSync): void {
     const rows = sorted.map((proposal) => {
       const isWinner = proposal === winner;
       const row = el('div', `proposal${isWinner ? ' winner' : ''}`);
-      const dot = el('span', 'tab-dot');
+      const dot = el('span', 'swatch');
       dot.style.setProperty('--tab-hue', String(tabHue(proposal.tab)));
       const name = proposal.tab === sync.tabId ? `${t.tabLabel(shortCode(proposal.tab))} (${t.you})` : t.tabLabel(shortCode(proposal.tab));
       row.append(
@@ -379,7 +368,7 @@ export function mountApp(root: HTMLElement, sync: TabSync): void {
 
       const meta = el('span', 'meta');
       if (entry.source === 'remote' && entry.from) {
-        const dot = el('span', 'tab-dot');
+        const dot = el('span', 'swatch');
         dot.style.setProperty('--tab-hue', String(tabHue(entry.from)));
         meta.append(dot, t.fromTab(t.tabLabel(shortCode(entry.from))));
         if (entry.ms !== undefined) meta.append(` · ${formatMs(entry.ms)}`);

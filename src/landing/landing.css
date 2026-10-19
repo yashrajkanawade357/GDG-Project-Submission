@@ -1,0 +1,281 @@
+@import '../theme.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.masthead,
+main > section,
+.colophon {
+  width: 100%;
+  max-width: 78rem;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: 1.85rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.masthead-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.4rem;
+  font-size: 0.9375rem;
+}
+
+.masthead-nav a:not(.btn) {
+  text-decoration: none;
+}
+
+.masthead-nav a:not(.btn):hover {
+  text-decoration: underline;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding-top: clamp(2.5rem, 7vw, 5.5rem);
+}
+
+.hero-copy {
+  display: grid;
+  gap: 0 3rem;
+}
+
+@media (min-width: 64rem) {
+  .hero-copy {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .kicker {
+    grid-column: 1 / -1;
+  }
+
+  .hero-side .lede {
+    margin-top: 0;
+  }
+}
+
+.kicker {
+  margin: 0 0 1.25rem;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6.4vw, 5.4rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+}
+
+h1 em {
+  color: var(--signal);
+}
+
+.lede {
+  max-width: 36rem;
+  margin: 1.5rem 0 0;
+  color: var(--ink-2);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 2rem;
+}
+
+.aside {
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.stage {
+  position: relative;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  border-block: 1px solid var(--rule-strong);
+  /* Graph paper behind the scene. */
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: clamp(17rem, 34vw, 29rem);
+}
+
+.stage figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.9rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule-strong);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.caption-label {
+  color: var(--signal);
+}
+
+.stage.no-webgl canvas {
+  height: 6rem;
+}
+
+/* ---------- Sections ---------- */
+
+main > section + section {
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.section-head p {
+  margin: 0.6rem 0 0;
+  color: var(--ink-2);
+}
+
+.spec {
+  display: grid;
+  gap: 1.5rem 3rem;
+}
+
+@media (min-width: 60rem) {
+  .spec {
+    grid-template-columns: 17rem minmax(0, 1fr);
+  }
+}
+
+.spec-list {
+  margin: 0;
+  border-top: 1px solid var(--ink);
+}
+
+.spec-list > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.25rem 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 40rem) {
+  .spec-list > div {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+}
+
+.spec-list dt {
+  padding-top: 0.15rem;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.spec-list dd {
+  max-width: 44rem;
+  margin: 0;
+}
+
+.spec-list code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+.figure {
+  font-family: var(--serif);
+  font-size: 1.6em;
+  line-height: 1;
+}
+
+.try-list {
+  display: grid;
+  gap: 0;
+  margin: 1.75rem 0 2rem;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+  counter-reset: step;
+}
+
+.try-list li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  counter-increment: step;
+}
+
+.try-list li::before {
+  content: counter(step);
+  color: var(--signal);
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.try-list strong {
+  font-weight: 600;
+}
+
+/* ---------- Colophon ---------- */
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  margin-top: clamp(4rem, 9vw, 7rem);
+  padding-block: 1.5rem 2rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.colophon a {
+  margin-left: auto;
+}
+
+@media (max-width: 40rem) {
+  .colophon a {
+    margin-left: 0;
+  }
+}

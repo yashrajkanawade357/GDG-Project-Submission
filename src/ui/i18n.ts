@@ -10,6 +10,8 @@ export interface Messages {
   darkModeHint: string;
   on: string;
   off: string;
+  light: string;
+  dark: string;
   language: string;
   languageHint: string;
   textSize: string;
@@ -56,7 +58,7 @@ export const LANGUAGE_NAMES: Record<Language, string> = {
 };
 
 const en: Messages = {
-  title: 'Settings Sync',
+  title: 'Tandem',
   subtitle: 'Change a preference in any tab. Every other open tab follows within milliseconds.',
   tabLabel: (code) => `Tab ${code}`,
   openTab: 'Open another tab',
@@ -65,6 +67,8 @@ const en: Messages = {
   darkModeHint: 'Switch between a light and a dark theme.',
   on: 'On',
   off: 'Off',
+  light: 'Light',
+  dark: 'Dark',
   language: 'Language',
   languageHint: 'Used for every label in the app.',
   textSize: 'Text size',
@@ -102,7 +106,7 @@ const en: Messages = {
 };
 
 const hi: Messages = {
-  title: 'सेटिंग्स सिंक',
+  title: 'Tandem',
   subtitle: 'किसी भी टैब में पसंद बदलें। बाकी सभी खुले टैब मिलीसेकंड में अपडेट हो जाते हैं।',
   tabLabel: (code) => `टैब ${code}`,
   openTab: 'एक और टैब खोलें',
@@ -111,6 +115,8 @@ const hi: Messages = {
   darkModeHint: 'हल्की और गहरी थीम के बीच बदलें।',
   on: 'चालू',
   off: 'बंद',
+  light: 'हल्का',
+  dark: 'गहरा',
   language: 'भाषा',
   languageHint: 'ऐप के सभी लेबल इसी भाषा में दिखते हैं।',
   textSize: 'टेक्स्ट का आकार',
@@ -149,7 +155,7 @@ const hi: Messages = {
 };
 
 const es: Messages = {
-  title: 'Ajustes sincronizados',
+  title: 'Tandem',
   subtitle: 'Cambia una preferencia en cualquier pestaña. Las demás pestañas abiertas la siguen en milisegundos.',
   tabLabel: (code) => `Pestaña ${code}`,
   openTab: 'Abrir otra pestaña',
@@ -158,6 +164,8 @@ const es: Messages = {
   darkModeHint: 'Alterna entre un tema claro y uno oscuro.',
   on: 'Activado',
   off: 'Desactivado',
+  light: 'Claro',
+  dark: 'Oscuro',
   language: 'Idioma',
   languageHint: 'Se usa en todas las etiquetas de la aplicación.',
   textSize: 'Tamaño del texto',
@@ -196,7 +204,7 @@ const es: Messages = {
 };
 
 const fr: Messages = {
-  title: 'Réglages synchronisés',
+  title: 'Tandem',
   subtitle:
     'Modifiez une préférence dans n’importe quel onglet : les autres onglets ouverts suivent en quelques millisecondes.',
   tabLabel: (code) => `Onglet ${code}`,
@@ -206,6 +214,8 @@ const fr: Messages = {
   darkModeHint: 'Basculez entre un thème clair et un thème sombre.',
   on: 'Activé',
   off: 'Désactivé',
+  light: 'Clair',
+  dark: 'Sombre',
   language: 'Langue',
   languageHint: 'Utilisée pour tous les libellés de l’application.',
   textSize: 'Taille du texte',
@@ -244,7 +254,7 @@ const fr: Messages = {
 };
 
 const de: Messages = {
-  title: 'Einstellungs-Sync',
+  title: 'Tandem',
   subtitle:
     'Ändere eine Einstellung in einem beliebigen Tab – alle anderen offenen Tabs folgen innerhalb von Millisekunden.',
   tabLabel: (code) => `Tab ${code}`,
@@ -254,6 +264,8 @@ const de: Messages = {
   darkModeHint: 'Wechsle zwischen hellem und dunklem Design.',
   on: 'An',
   off: 'Aus',
+  light: 'Hell',
+  dark: 'Dunkel',
   language: 'Sprache',
   languageHint: 'Gilt für alle Beschriftungen der App.',
   textSize: 'Textgröße',
@@ -292,7 +304,7 @@ const de: Messages = {
 };
 
 const ja: Messages = {
-  title: '設定の同期',
+  title: 'Tandem',
   subtitle: 'どのタブで設定を変えても、開いている他のタブが数ミリ秒で追従します。',
   tabLabel: (code) => `タブ ${code}`,
   openTab: '別のタブを開く',
@@ -301,6 +313,8 @@ const ja: Messages = {
   darkModeHint: 'ライトテーマとダークテーマを切り替えます。',
   on: 'オン',
   off: 'オフ',
+  light: 'ライト',
+  dark: 'ダーク',
   language: '言語',
   languageHint: 'アプリ内のすべての表示に使われます。',
   textSize: '文字サイズ',
