@@ -15,7 +15,7 @@
 
 <br />
 
-<img src="docs/screenshots/app-light.jpg" alt="The Tandem app in light mode: preferences on the left, the sync monitor on the right with three tabs in sync and a finished conflict drill" width="820" />
+<img src="docs/screenshots/app-light.jpg" alt="The Tandem app in light mode: preferences on the left, the sync monitor on the right with live latency and two tabs in sync" width="860" />
 
 </div>
 
@@ -61,6 +61,12 @@
 | New tabs never show the wrong theme | Inline script in `<head>` applies saved settings before the first frame | `app/index.html` |
 | Deterministic conflict resolution | Per-setting last-writer-wins with a hybrid logical clock; the tab id breaks ties | `src/sync/clock.ts`, `src/sync/merge.ts` |
 | Repository, README, technical explanation, deployment | This repository, this file, the sections below, and the [live site](https://gdg-project-submission.vercel.app) | – |
+
+<div align="center">
+<img src="docs/screenshots/app-hindi.jpg" alt="The same app with the language set to Hindi" width="760" />
+<br />
+<sub>Switch the language in one tab and every open tab re-renders in it. Here: हिन्दी.</sub>
+</div>
 
 <details>
 <summary><b>Evaluation criteria, mapped</b></summary>
