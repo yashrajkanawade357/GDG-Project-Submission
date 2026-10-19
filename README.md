@@ -74,7 +74,7 @@ sequenceDiagram
     A->>LS: Save the merged state
     BC-->>B: Delivered (about 1 ms)
     B->>B: Merge field by field, re-render
-    LS-->>B: "storage" event (backup path; merging it again changes nothing)
+    LS-->>B: "storage" event (backup path, merging it again changes nothing)
     B->>BC: "presence" message with its settings fingerprint
 ```
 
