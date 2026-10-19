@@ -1,5 +1,20 @@
 @import './theme.css';
 
+/*
+ * The app's own type: Geist for text and headings, Geist Mono only for numbers and ids.
+ * These overrides live in the app stylesheet, so the landing page keeps its own fonts.
+ */
+:root {
+  --sans: 'Geist', 'Noto Sans Devanagari', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+body {
+  font-feature-settings: 'cv11', 'ss01';
+  letter-spacing: -0.006em;
+}
+
 /* Hidden only until the app has rendered its (translated) text; the background is already right. */
 html:not(.mounted) #app {
   visibility: hidden;
@@ -31,10 +46,10 @@ html.ready :is(body, .btn, .seg-opt, .select select, .preview, .trace) {
 
 .wordmark {
   margin: 0;
-  font-family: var(--serif);
-  font-size: 1.9rem;
-  font-weight: 400;
+  font-size: 1.35rem;
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: -0.035em;
 }
 
 .wordmark a {
@@ -108,17 +123,18 @@ html.ready :is(body, .btn, .seg-opt, .select select, .preview, .trace) {
 }
 
 .col h2 {
-  margin: 1.6rem 0 0.9rem;
-  font-family: var(--serif);
-  font-size: 2.2rem;
-  font-weight: 400;
-  line-height: 1;
+  margin: 1.75rem 0 0.9rem;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.028em;
 }
 
 h3 {
   margin: 0 0 0.8rem;
   font-size: 0.95rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .hint {
@@ -130,8 +146,8 @@ h3 {
 .note {
   margin: 0.6rem 0 0;
   color: var(--ink-2);
-  font-family: var(--mono);
   font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- Preferences ---------- */
@@ -152,6 +168,7 @@ h3 {
 .row-title {
   display: block;
   font-weight: 600;
+  letter-spacing: -0.012em;
 }
 
 /* Light | Dark segmented control. One checkbox underneath, so it stays a real switch. */
@@ -182,8 +199,8 @@ h3 {
   min-width: 4.75rem;
   padding: 0.4rem 0.8rem;
   color: var(--ink-2);
-  font-family: var(--mono);
   font-size: 0.8125rem;
+  font-weight: 500;
   text-align: center;
 }
 
@@ -240,17 +257,19 @@ h3 {
 }
 
 .size-figure {
-  font-family: var(--serif);
-  font-size: 3rem;
-  line-height: 0.85;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
   font-variant-numeric: tabular-nums;
 }
 
 .size-figure::after {
   content: 'px';
-  margin-left: 0.2rem;
+  margin-left: 0.25rem;
   color: var(--ink-2);
   font-family: var(--mono);
+  letter-spacing: 0;
   font-size: 0.8125rem;
 }
 
@@ -332,7 +351,6 @@ input[type='range']::-moz-range-thumb {
   padding-top: 1rem;
   border-top: 1px solid var(--rule);
   color: var(--ink-2);
-  font-family: var(--mono);
   font-size: 0.8125rem;
 }
 
@@ -389,16 +407,17 @@ input[type='range']::-moz-range-thumb {
 
 .readouts dt {
   color: var(--ink-2);
-  font-family: var(--mono);
   font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .readouts dd {
   margin: 0.15rem 0 0;
   overflow: hidden;
   font-family: var(--mono);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 500;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -470,8 +489,8 @@ input[type='range']::-moz-range-thumb {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  font-family: var(--mono);
   font-size: 0.75rem;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -601,7 +620,6 @@ input[type='range']::-moz-range-thumb {
   gap: 0.4rem;
   grid-column: 2;
   color: var(--ink-2);
-  font-family: var(--mono);
   font-size: 0.75rem;
 }
 

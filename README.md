@@ -335,8 +335,9 @@ isolation.
 
 **Look**
 
-Paper and ink colours with a single vermilion accent. Instrument Serif for headings, IBM Plex
-Sans for text, IBM Plex Mono for numbers. Thin rules instead of cards and shadows.
+Paper and ink colours with a single vermilion accent, thin rules instead of cards and shadows.
+The app uses **Geist** for text and headings and **Geist Mono** for numbers and ids (Noto Sans
+Devanagari for Hindi). The landing page has its own editorial type: Instrument Serif and IBM Plex.
 
 </td>
 <td width="38%" valign="top">
